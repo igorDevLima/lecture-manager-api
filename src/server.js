@@ -1,4 +1,8 @@
+const app = require("./app");
 const pool = require("./db/connection");
+
+const apiPort = process.env.API_PORT || "3001";
+
 pool
   .getConnection()
   .then((conn) => {
@@ -19,6 +23,11 @@ pool
          _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
         `
     );
+    
+    app.listen(apiPort, async () => {
+      console.log(`Server running on http://localhost:${apiPort}`);
+    });
+    
   })
   .catch((err) => {
     console.log(err);
