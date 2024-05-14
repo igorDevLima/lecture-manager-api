@@ -33,6 +33,40 @@ class LocationController {
       data: addNewLocation,
     });
   }
+
+  async update(req, res) {
+    const locationBody = req.body;
+    const { id } = req.params;
+
+    const [locationById] = await locationRepository.findById(id);
+
+    if (locationById.length == 0) throw new NotFoundError("Location not found");
+
+    const [updateNewLocation] = await locationRepository.update(
+      id,
+      locationBody
+    );
+
+    return res.status(200).json({
+      message: "Location updated!",
+      data: updateNewLocation,
+    });
+  }
+
+  async delete(req, res) {
+    const { id } = req.params;
+
+    const [locationById] = await locationRepository.findById(id);
+
+    if (locationById.length == 0) throw new NotFoundError("Location not found");
+
+    const [deleteNewLocation] = await locationRepository.remove(id);
+
+    return res.status(200).json({
+      message: "Location deleted!",
+      data: deleteNewLocation,
+    });
+  }
 }
 
 module.exports = new LocationController();

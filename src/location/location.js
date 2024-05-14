@@ -15,5 +15,12 @@ router.post("/", validateLocation, (req, res) =>
   locationController.addNew(req, res)
 );
 
+router.put("/:id", [validateParamsID, validateLocation], (req, res) =>
+  locationController.update(req, res)
+);
+
+router.delete("/:id", validateParamsID, (req, res) =>
+  locationController.delete(req, res)
+);
 
 module.exports = router;
