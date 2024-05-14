@@ -1,14 +1,15 @@
 const { NotFoundError, ConflictError } = require("../common/helpers/api-error");
+const {
+  OKResponse,
+  CreatedResponse,
+} = require("../common/helpers/api-success");
 const locationRepository = require("./locationRepository");
 
 class LocationController {
   async showAll(req, res) {
     const [allLocations] = await locationRepository.findAll();
 
-    return res.status(200).json({
-      message: "All locations found!",
-      data: allLocations,
-    });
+    return new OKResponse("All locations found!", allLocations).send(res);
   }
 
   async showById(req, res) {
@@ -18,10 +19,7 @@ class LocationController {
 
     if (locationById.length == 0) throw new NotFoundError("Location not found");
 
-    return res.status(200).json({
-      message: "Location found!",
-      data: locationById,
-    });
+    return new OKResponse("Location found!", locationById).send(res);
   }
 
   async addNew(req, res) {
@@ -32,12 +30,9 @@ class LocationController {
     if (locationExists.length != 0)
       throw new ConflictError("Location already exists");
 
-    const [addNewLocation] = await locationRepository.insert(locationBody);
+    const [newLocation] = await locationRepository.insert(locationBody);
 
-    return res.status(200).json({
-      message: "Location added!",
-      data: addNewLocation,
-    });
+    return new CreatedResponse("Location created!", newLocation).send(res);
   }
 
   async update(req, res) {
@@ -48,15 +43,9 @@ class LocationController {
 
     if (locationById.length == 0) throw new NotFoundError("Location not found");
 
-    const [updateNewLocation] = await locationRepository.update(
-      id,
-      locationBody
-    );
+    const [updateLocation] = await locationRepository.update(id, locationBody);
 
-    return res.status(200).json({
-      message: "Location updated!",
-      data: updateNewLocation,
-    });
+    return new OKResponse("Location updated!", updateLocation).send(res);
   }
 
   async delete(req, res) {
@@ -66,12 +55,9 @@ class LocationController {
 
     if (locationById.length == 0) throw new NotFoundError("Location not found");
 
-    const [deleteNewLocation] = await locationRepository.remove(id);
+    const [deleteLocation] = await locationRepository.remove(id);
 
-    return res.status(200).json({
-      message: "Location deleted!",
-      data: deleteNewLocation,
-    });
+    return new OKResponse("Location deleted!", deleteLocation).send(res);
   }
 }
 
