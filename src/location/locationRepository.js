@@ -8,7 +8,7 @@ class LocationRepository {
 
   findAll = () =>
     connection.execute(`
-  SELECT * FROM locations LIMIT 1
+  SELECT * FROM locations
   `);
 
   findById = (id) =>
