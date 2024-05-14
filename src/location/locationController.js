@@ -5,7 +5,10 @@ class LocationController {
   async showAll(req, res) {
     const [allLocations] = await locationRepository.findAll();
 
-    return res.status(200).json(allLocations);
+    return res.status(200).json({
+      message: "All locations found!",
+      data: allLocations,
+    });
   }
 
   async showById(req, res) {
@@ -15,7 +18,10 @@ class LocationController {
 
     if (locationById.length == 0) throw new NotFoundError("Location not found");
 
-    return res.status(200).json(locationById);
+    return res.status(200).json({
+      message: "Location found!",
+      data: locationById,
+    });
   }
 
   async addNew(req, res) {
