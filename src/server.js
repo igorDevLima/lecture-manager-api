@@ -1,5 +1,5 @@
 const app = require("./app");
-const pool = require("./db/connection");
+const pool = require("./common/db/connection");
 
 const apiPort = process.env.API_PORT || "3001";
 
