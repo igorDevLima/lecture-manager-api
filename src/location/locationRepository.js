@@ -20,13 +20,13 @@ class LocationRepository {
     ]);
 
   update = (id, location) =>
-    connection.execute(`UPDATE locations SET name = ? WHERE id = ?`, [
+    connection.execute(`UPDATE locations SET name = ? WHERE location_id = ?`, [
       location.name,
       id,
     ]);
 
   remove = (id) =>
-    connection.execute(`DELETE FROM locations where id = ?`, [id]);
+    connection.execute(`DELETE FROM locations WHERE location_id = ?`, [id]);
 }
 
 module.exports = new LocationRepository();
