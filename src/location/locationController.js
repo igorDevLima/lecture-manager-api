@@ -22,7 +22,7 @@ class LocationController {
     return new OKResponse("Location found!", locationById).send(res);
   }
 
-  async addNew(req, res) {
+  async create(req, res) {
     const locationBody = req.body;
 
     const [locationExists] = await locationRepository.findByName(locationBody);

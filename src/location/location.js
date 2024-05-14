@@ -12,7 +12,7 @@ router.get("/:id", validateParamsID, (req, res) =>
 );
 
 router.post("/", validateLocation, (req, res) =>
-  locationController.addNew(req, res)
+  locationController.create(req, res)
 );
 
 router.put("/:id", [validateParamsID, validateLocation], (req, res) =>
