@@ -10,9 +10,10 @@ app.use(express.json());
 */
 
 const locationRouter = require("./location/location");
-
+const eventRouter = require("./event/event");
 
 app.use("/location", locationRouter);
+app.use("/event", eventRouter);
 
 // -----------------------------------------------------
 
