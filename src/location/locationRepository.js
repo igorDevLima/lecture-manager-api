@@ -6,6 +6,18 @@ class LocationRepository {
       location.name,
     ]);
 
+  insertIfNameDontExist = (location) =>
+    connection.execute(
+      `
+      INSERT INTO locations (name)
+      SELECT * FROM (SELECT ?) AS tmp
+      WHERE NOT EXISTS (
+          SELECT name FROM locations WHERE name = ?
+      ) LIMIT 1;
+      `,
+      [location.name, location.name]
+    );
+
   findAll = () =>
     connection.execute(`
   SELECT * FROM locations
