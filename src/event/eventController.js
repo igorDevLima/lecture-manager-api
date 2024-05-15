@@ -10,16 +10,16 @@ const {
 const eventRepository = require("./eventRepository");
 const locationRepository = require("../location/locationRepository");
 
-const addLocationIfNotExistAndReturnID = async (location) => {
+const addLocationIfNotExistAndReturnID = async (location_name) => {
   let eventLocation = {};
 
   [eventLocation] = await locationRepository.insertIfNameDontExist({
-    name: location,
+    name: location_name,
   });
 
   if (eventLocation.insertId === 0) {
     const [adedLocation] = await locationRepository.findByName({
-      name: location,
+      name: location_name,
     });
 
     eventLocation.id = adedLocation[0].location_id;
@@ -28,6 +28,29 @@ const addLocationIfNotExistAndReturnID = async (location) => {
   }
 
   return eventLocation.id;
+};
+
+const checkLocationAvailability = async (
+  location_id,
+  body,
+  ignoreEqualEventId = false,
+  event_id = null
+) => {
+  if (ignoreEqualEventId && event_id === null)
+    throw new Error("event_id is required");
+
+  const [reservedEvents] = ignoreEqualEventId
+    ? await eventRepository.findReservedLocationIgnoreEqualEventId(
+        location_id,
+        event_id,
+        body
+      )
+    : await eventRepository.findReservedLocation(location_id, body);
+
+  if (reservedEvents.length != 0)
+    throw new BadRequestError(
+      "Sorry, the location is already reserved for this date."
+    );
 };
 
 class eventController {
@@ -55,15 +78,7 @@ class eventController {
       : null;
 
     if (eventBody.begin_date_time && eventBody.end_date_time) {
-      const [reservedEvents] = await eventRepository.findReservedLocation(
-        location_id,
-        eventBody
-      );
-
-      if (reservedEvents.length != 0)
-        throw new BadRequestError(
-          "Sorry, the location is already reserved for this date."
-        );
+      await checkLocationAvailability(location_id, eventBody);
     }
 
     const [newEvent] = await eventRepository.insert({
@@ -89,17 +104,7 @@ class eventController {
       : null;
 
     if (eventBody.begin_date_time && eventBody.end_date_time) {
-      const [reservedEvents] =
-        await eventRepository.findReservedLocationIgnoreEqualEventId(
-          location_id,
-          id,
-          eventBody
-        );
-
-      if (reservedEvents.length != 0)
-        throw new BadRequestError(
-          "Sorry, the location is already reserved for this date."
-        );
+      await checkLocationAvailability(location_id, eventBody, true, id);
     }
 
     const [updateEvent] = await eventRepository.update(id, {
