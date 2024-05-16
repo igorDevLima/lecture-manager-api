@@ -11,9 +11,11 @@ app.use(express.json());
 
 const locationRouter = require("./location/location");
 const eventRouter = require("./event/event");
+const panelistRouter = require("./panelist/panelist");
 
 app.use("/location", locationRouter);
 app.use("/event", eventRouter);
+app.use("/panelist", panelistRouter);
 
 // -----------------------------------------------------
 
