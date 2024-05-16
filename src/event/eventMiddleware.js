@@ -7,8 +7,8 @@ const validateEvent = (req, res, next) => {
 
   const schema = Joi.object({
     name: Joi.string().min(3).max(120).required(),
-    begin_date_time: Joi.date(),
-    end_date_time: Joi.date(),
+    begin_date_time: Joi.date().required(),
+    end_date_time: Joi.date().required(),
     location: Joi.string().min(3).max(120),
   });
 
@@ -16,17 +16,15 @@ const validateEvent = (req, res, next) => {
 
   if (error) throw new BadRequestError(error.details[0].message);
 
-  if (location.begin_date_time && location.end_date_time) {
-    if (
-      !beginDateIsEarlierEndDates(
-        location.begin_date_time,
-        location.end_date_time
-      )
+  if (
+    !beginDateIsEarlierEndDates(
+      location.begin_date_time,
+      location.end_date_time
     )
-      throw new BadRequestError(
-        "The start date should be earlier than the end date."
-      );
-  }
+  )
+    throw new BadRequestError(
+      "The start date should be earlier than the end date."
+    );
 
   next();
 };

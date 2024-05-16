@@ -77,9 +77,7 @@ class eventController {
       ? await addLocationIfNotExistAndReturnID(eventBody.location)
       : null;
 
-    if (eventBody.begin_date_time && eventBody.end_date_time) {
-      await checkLocationAvailability(location_id, eventBody);
-    }
+    await checkLocationAvailability(location_id, eventBody);
 
     const [newEvent] = await eventRepository.insert({
       name: eventBody.name,
@@ -103,9 +101,7 @@ class eventController {
       ? await addLocationIfNotExistAndReturnID(eventBody.location)
       : null;
 
-    if (eventBody.begin_date_time && eventBody.end_date_time) {
-      await checkLocationAvailability(location_id, eventBody, true, id);
-    }
+    await checkLocationAvailability(location_id, eventBody, true, id);
 
     const [updateEvent] = await eventRepository.update(id, {
       name: eventBody.name,

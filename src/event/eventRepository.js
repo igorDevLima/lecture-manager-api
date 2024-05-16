@@ -6,8 +6,8 @@ class eventRepository {
       `INSERT INTO events (name, begin_date_time, end_date_time, location_id) VALUES (?, ?, ?, ?);`,
       [
         event.name,
-        event.begin_date_time || null,
-        event.end_date_time || null,
+        event.begin_date_time,
+        event.end_date_time,
         event.location_id || null,
       ]
     );
@@ -77,8 +77,8 @@ class eventRepository {
       `UPDATE events SET name = ? , begin_date_time = ? , end_date_time = ?, location_id = ?  WHERE event_id = ?`,
       [
         event.name,
-        event.begin_date_time || null,
-        event.end_date_time || null,
+        event.begin_date_time,
+        event.end_date_time,
         event.location_id || null,
         id,
       ]
