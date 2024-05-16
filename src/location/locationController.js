@@ -3,13 +3,17 @@ const {
   OKResponse,
   CreatedResponse,
 } = require("../common/helpers/api-success");
+const { formattedLocationsData } = require("../common/helpers/functions");
 const locationRepository = require("./locationRepository");
 
 class LocationController {
   async showAll(req, res) {
     const [allLocations] = await locationRepository.findAll();
 
-    return new OKResponse("All locations found!", allLocations).send(res);
+    return new OKResponse(
+      "All locations found!",
+      allLocations.length != 0 ? formattedLocationsData(allLocations) : []
+    ).send(res);
   }
 
   async showById(req, res) {
@@ -19,7 +23,7 @@ class LocationController {
 
     if (locationById.length == 0) throw new NotFoundError("Location not found");
 
-    return new OKResponse("Location found!", locationById).send(res);
+    return new OKResponse("Location found!", formattedLocationsData(locationById)).send(res);
   }
 
   async create(req, res) {
