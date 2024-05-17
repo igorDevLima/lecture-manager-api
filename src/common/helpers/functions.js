@@ -42,7 +42,44 @@ const formattedLocationsData = (locationsArray) =>
     return acc;
   }, []);
 
+const formattedEventsData = (eventsArray) =>
+  eventsArray.reduce((acc, row) => {
+    const existingEvent = acc.find((item) => item.event_id === row.event_id);
+
+    if (!existingEvent) {
+      const newEvent = {
+        event_id: row.event_id,
+        name: row.name,
+        begin_date_time: row.begin_date_time,
+        end_date_time: row.end_date_time,
+        location: row.location,
+        lectures:
+          row.lecture_id != null
+            ? [
+                {
+                  lecture_id: row.lecture_id,
+                  theme: row.theme,
+                  begin_date_time: row.lecture_begin_date_time,
+                  panelist_id: row.panelist_id,
+                },
+              ]
+            : [],
+      };
+      acc.push(newEvent);
+    } else {
+      existingEvent.lectures.push({
+        lecture_id: row.lecture_id,
+        theme: row.theme,
+        begin_date_time: row.lecture_begin_date_time,
+        panelist_id: row.panelist_id,
+      });
+    }
+
+    return acc;
+  }, []);
+
 module.exports = {
   beginDateIsEarlierEndDates,
   formattedLocationsData,
+  formattedEventsData,
 };

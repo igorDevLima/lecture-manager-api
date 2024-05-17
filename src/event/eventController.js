@@ -9,6 +9,7 @@ const {
 } = require("../common/helpers/api-success");
 const eventRepository = require("./eventRepository");
 const locationRepository = require("../location/locationRepository");
+const { formattedEventsData } = require("../common/helpers/functions");
 
 const addLocationIfNotExistAndReturnID = async (location_name) => {
   let eventLocation = {};
@@ -57,7 +58,10 @@ class eventController {
   async showAll(req, res) {
     const [allEvents] = await eventRepository.findAll();
 
-    return new OKResponse("All events found!", allEvents).send(res);
+    return new OKResponse(
+      "All events found!",
+      formattedEventsData(allEvents)
+    ).send(res);
   }
 
   async showById(req, res) {
@@ -67,7 +71,9 @@ class eventController {
 
     if (eventById.length == 0) throw new NotFoundError("event not found");
 
-    return new OKResponse("Event found!", eventById).send(res);
+    return new OKResponse("Event found!", formattedEventsData(eventById)).send(
+      res
+    );
   }
 
   async create(req, res) {

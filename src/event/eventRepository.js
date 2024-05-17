@@ -20,12 +20,19 @@ class eventRepository {
         E.name,
         E.begin_date_time,
         E.end_date_time,
-        L.name as location
+        L.name as location,
+        LE.lecture_id,
+        LE.theme,
+        LE.begin_date_time as lecture_begin_date_time,
+        LE.panelist_id
     FROM
         events E
     LEFT JOIN
         locations L
-    ON E.location_id = L.location_id;
+    ON E.location_id = L.location_id
+    LEFT JOIN
+        lectures LE
+    ON E.event_id = LE.event_id;
   `
     );
 
@@ -37,12 +44,21 @@ class eventRepository {
         E.name,
         E.begin_date_time,
         E.end_date_time,
-        L.name as location
+        L.name as location,
+        L.name as location,
+        LE.lecture_id,
+        LE.theme,
+        LE.begin_date_time as lecture_begin_date_time,
+        LE.panelist_id
       FROM
         events E
       LEFT JOIN
         locations L
-      ON E.location_id = L.location_id WHERE E.event_id = ?;
+        ON E.location_id = L.location_id
+        LEFT JOIN
+            lectures LE
+        ON E.event_id = LE.event_id
+      WHERE E.event_id = ?;
   `,
       [id]
     );
