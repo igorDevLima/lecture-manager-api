@@ -1,5 +1,5 @@
 const beginDateIsEarlierEndDates = (begin_date_time, end_date_time) => {
-  if (begin_date_time < end_date_time) return true;
+  if (new Date(begin_date_time) < new Date(end_date_time)) return true;
 
   return false;
 };
