@@ -26,11 +26,12 @@ class LectureRepository {
 
   update = (id, lecture) =>
     connection.execute(
-      `UPDATE lectures SET first_name = ? , last_name = ? , academic_degree = ? WHERE lecture_id = ?`,
+      `UPDATE lectures SET theme = ?, begin_date_time = ?, panelist_id = ?, event_id = ? WHERE lecture_id = ?`,
       [
-        lecture.first_name,
-        lecture.last_name,
-        lecture.academic_degree || null,
+        lecture.theme,
+        lecture.begin_date_time,
+        lecture.panelist_id,
+        lecture.event_id,
         id,
       ]
     );
