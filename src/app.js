@@ -12,10 +12,12 @@ app.use(express.json());
 const locationRouter = require("./location/location");
 const eventRouter = require("./event/event");
 const panelistRouter = require("./panelist/panelist");
+const lectureRouter = require("./lecture/lecture");
 
 app.use("/location", locationRouter);
 app.use("/event", eventRouter);
 app.use("/panelist", panelistRouter);
+app.use("/lecture", lectureRouter);
 
 // -----------------------------------------------------
 
