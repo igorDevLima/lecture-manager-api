@@ -12,7 +12,7 @@ class LocationController {
 
     return new OKResponse(
       "All locations found!",
-      allLocations.length != 0 ? formattedLocationsData(allLocations) : []
+      formattedLocationsData(allLocations)
     ).send(res);
   }
 
@@ -23,7 +23,10 @@ class LocationController {
 
     if (locationById.length == 0) throw new NotFoundError("Location not found");
 
-    return new OKResponse("Location found!", formattedLocationsData(locationById)).send(res);
+    return new OKResponse(
+      "Location found!",
+      formattedLocationsData(locationById)
+    ).send(res);
   }
 
   async create(req, res) {
