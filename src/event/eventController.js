@@ -49,7 +49,7 @@ const checkLocationAvailability = async (
     : await eventRepository.findReservedLocation(location_id, body);
 
   if (reservedEvents.length != 0)
-    throw new BadRequestError(
+    throw new ConflictError(
       "Sorry, the location is already reserved for this date."
     );
 };
