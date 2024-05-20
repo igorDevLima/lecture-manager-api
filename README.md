@@ -211,3 +211,24 @@ curl --request GET \
 ```
 
 </details>
+
+---
+
+## Technology
+
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+
+![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+
+![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
+
+### Back-end :coffee:
+
+| Technology                          | Description                                                                                                                                                  |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [**Node.js**](https://nodejs.org/en)    | Node.js is a free, open-source, cross-platform JavaScript runtime environment that lets developers create servers, web apps, command line tools and scripts. |
+| [**Express**](http://expressjs.com/)    |  Fast, unopinionated, minimalist web framework for Node.js. With a myriad of HTTP utility methods and middleware at your disposal, creating a robust API is quick and easy. |
+| [**MySQL**](https://www.mysql.com/) | A relational database management system.                                                                                                                     |
+
