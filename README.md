@@ -214,6 +214,176 @@ curl --request GET \
 
 ---
 
+### Event <code><b>/event</b></code>
+
+#### Creating, reading, updating and deleting a Event
+
+<details>
+ <summary><code>POST</code> <code><b>/</b></code></summary>
+
+##### Parameters
+
+> None
+
+##### Request Body
+
+> | Field           | Type   | Required | Description                                       |
+> | --------------- | ------ | -------- | ------------------------------------------------- |
+> | name            | String | Yes      | The event name                                    |
+> | begin_date_time | String | Yes      | start event timestamp. ex.: "2024-12-19 21:00:00" |
+> | end_date_time   | String | Yes      | start event timestamp. ex.: "2024-12-19 21:00:00" |
+> | location        | String | Yes      | The location name                                 |
+
+##### Responses
+
+> | HTTP Code | Content-Type       | Response                                                                                                                                                    |
+> | --------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+> | `201`     | `application/json` | `{"message": "Event created!","data": {"fieldCount": 0,"affectedRows": 1,"insertId": 20,"info": "","serverStatus": 2,"warningStatus": 0,"changedRows": 0}}` |
+> | `400`     | `application/json` | `{"error": "\"begin_date_time\" is required"}`                                                                                                              |
+> | `409`     | `application/json` | `"error": "Sorry, the location is already reserved for this date."`                                                                                         |
+
+##### Example cURL Command
+
+```bash
+curl --request POST \
+--url http://localhost:3001/event \
+--header 'Content-Type: application/json' \
+--data '{
+	"name": "The Best Stand Up Festival",
+	"begin_date_time": "2024-12-10 18:00:00",
+	"end_date_time": "2024-12-19  21:00:00",
+	"location": "Municipal Theater"
+}'
+```
+
+</details>
+
+<details>
+ <summary><code>GET</code> <code><b>/</b></code></summary>
+
+##### Parameters
+
+> None
+
+##### Request Body
+
+> None
+
+##### Responses
+
+> | HTTP Code | Content-Type       | Response                                                                                                                                                                                                                                                                                                                                                                           |
+> | --------- | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+> | `200`     | `application/json` | ` {"message": "All events found!",   "data": [{ "event_id": 42, "name": "The Best Stand Up Festival", "begin_date_time": "2024-12-10T18:00:00.000Z", "end_date_time": "2024-12-19T21:00:00.000Z",   "location": "Municipal theater",    "lectures": [ {   "lecture_id": 21, "theme": "Laugh with Jimmy", "begin_date_time": "2024-12-12T21:00:00.000Z", "panelist_id": 4  }   ]}]` |
+
+##### Example cURL Command
+
+```bash
+curl --request GET \
+--url http://localhost:3001/event
+```
+
+</details>
+
+<details>
+ <summary><code>GET</code> <code><b>/{id}</b></code></summary>
+
+##### Parameters
+
+> | Field | Type | Required | Description  |
+> | ----- | ---- | -------- | ------------ |
+> | id    | int  | Yes      | The event id |
+
+##### Request Body
+
+> None
+
+##### Responses
+
+> | HTTP Code | Content-Type       | Response                                                                                                                                                                                                                                                                                                                                                                           |
+> | --------- | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+> | `200`     | `application/json` | ` {"message": "All events found!",   "data": [{ "event_id": 42, "name": "The Best Stand Up Festival", "begin_date_time": "2024-12-10T18:00:00.000Z", "end_date_time": "2024-12-19T21:00:00.000Z",   "location": "Municipal theater",    "lectures": [ {   "lecture_id": 21, "theme": "Laugh with Jimmy", "begin_date_time": "2024-12-12T21:00:00.000Z", "panelist_id": 4  }   ]}]` |
+> | `204`     | `application/json` | ` {"error": "Event not found"}`                                                                                                                                                                                                                                                                                                                                                    |
+
+##### Example cURL Command
+
+```bash
+curl --request GET \
+--url http://localhost:3001/event/42
+```
+
+</details>
+
+<details>
+ <summary><code>PUT</code> <code><b>/{id}</b></code></summary>
+
+##### Parameters
+
+> | Field | Type | Required | Description  |
+> | ----- | ---- | -------- | ------------ |
+> | id    | int  | Yes      | The event id |
+
+##### Request Body
+
+> | Field           | Type   | Required | Description                                       |
+> | --------------- | ------ | -------- | ------------------------------------------------- |
+> | name            | String | Yes      | The event name                                    |
+> | begin_date_time | String | Yes      | start event timestamp. ex.: "2024-12-19 21:00:00" |
+> | end_date_time   | String | Yes      | start event timestamp. ex.: "2024-12-19 21:00:00" |
+> | location        | String | Yes      | The location name                                 |
+
+##### Responses
+
+> | HTTP Code | Content-Type       | Response                                                                                                                                                                                              |
+> | --------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
+> | `200`     | `application/json` | `{"message": "Event updated!","data": {"fieldCount": 0,"affectedRows": 1,"insertId": 0,"info": "Rows matched: 1  Changed: 1  Warnings: 0","serverStatus": 2,"warningStatus": 0,"changedRows": 1}}` |
+> | `400`     | `application/json` | `{"error": "\"name\" is required"}`                                                                                                                                                                   |
+> | `404`     | `application/json` | `{"error": "Event not found"}`                                                                                                                                                                     |     |
+
+##### Example cURL Command
+
+```bash
+curl --request PUT \
+--url http://localhost:3001/event/38 \
+--header 'Content-Type: application/json' \
+--data '{
+	"name": "Laugh with Jimmy",
+	"begin_date_time": "2024-12-13 18:00:00",
+	"end_date_time": "2024-12-19  21:00:00",
+	"location": "Municipal theater"
+}'
+```
+
+</details>
+
+<details>
+ <summary><code>DELETE</code> <code><b>/{id}</b></code></summary>
+
+##### Parameters
+
+> | Field | Type | Required | Description     |
+> | ----- | ---- | -------- | --------------- |
+> | id    | int  | Yes      | The location id |
+
+##### Request Body
+
+> None
+
+##### Responses
+
+> | HTTP Code | Content-Type       | Response                                                                                                                                                                                                                                                            |
+> | --------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+> | `200`     | `application/json` | ` {"message": "Event deleted!",   "data": { "fieldCount": 0, "affectedRows": 1, "insertId": 0, "info": "","serverStatus": 2, "warningStatus": 0, "changedRows": 0}` |
+> | `204`     | `application/json` | ` {"error": "Location not found"}`                                                                                                                                                                                                                                  |
+
+##### Example cURL Command
+
+```bash
+curl --request DELETE \
+--url http://localhost:3001/event/42
+```
+
+</details>
+
 ## Technology
 
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
