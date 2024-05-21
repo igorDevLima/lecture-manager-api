@@ -105,15 +105,15 @@ curl --request POST \
 
 ##### Responses
 
-> | HTTP Code | Content-Type       | Response                                                                                                                                                                                                                                                                 |
-> | --------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-> | `200`     | `application/json` | ` {"message": "All locations found!",   "data": [{ "location_id": 18,   "location": "Municipal theater",    "events": [ {   "event_id": 42, "name": "Anime Brasil", "begin_date_time": "2024-06-22T21:00:00.000Z", "end_date_time": "2024-07-01T00:00:00.000Z"  }   ]}]` |
+> | HTTP Code | Content-Type       | Response                                                                                                                                                                                                                                                                               |
+> | --------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+> | `200`     | `application/json` | ` {"message": "All locations found!",   "data": [{ "location_id": 18,   "location": "Municipal theater",    "events": [ {   "event_id": 42, "name": "The Best Stand Up Festival", "begin_date_time": "2024-12-10T18:00:00.000Z", "end_date_time": "2024-12-19T21:00:00.000Z"  }   ]}]` |
 
 ##### Example cURL Command
 
 ```bash
 curl --request GET \
---url http://localhost:3001/panelist
+--url http://localhost:3001/location
 ```
 
 </details>
@@ -200,7 +200,7 @@ curl --request PUT \
 
 > | HTTP Code | Content-Type       | Response                                                                                                                                                                                                                                                            |
 > | --------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-> | `200`     | `application/json` | ` {"message": "Location found!",   "data": [{ "location_id": 18,   "location": "Municipal theater",    "events": [ {   "event_id": 42, "name": "Anime Brasil", "begin_date_time": "2024-06-22T21:00:00.000Z", "end_date_time": "2024-07-01T00:00:00.000Z"  }   ]}]` |
+> | `200`     | `application/json` | ` {"message": "Event deleted!",   "data": { "fieldCount": 0, "affectedRows": 1, "insertId": 0, "info": "","serverStatus": 2, "warningStatus": 0, "changedRows": 0}` |
 > | `204`     | `application/json` | ` {"error": "Location not found"}`                                                                                                                                                                                                                                  |
 
 ##### Example cURL Command
@@ -396,9 +396,8 @@ curl --request DELETE \
 
 ### Back-end :coffee:
 
-| Technology                          | Description                                                                                                                                                  |
-| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [**Node.js**](https://nodejs.org/en)    | Node.js is a free, open-source, cross-platform JavaScript runtime environment that lets developers create servers, web apps, command line tools and scripts. |
-| [**Express**](http://expressjs.com/)    |  Fast, unopinionated, minimalist web framework for Node.js. With a myriad of HTTP utility methods and middleware at your disposal, creating a robust API is quick and easy. |
-| [**MySQL**](https://www.mysql.com/) | A relational database management system.                                                                                                                     |
-
+| Technology                           | Description                                                                                                                                                                |
+| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**Node.js**](https://nodejs.org/en) | Node.js is a free, open-source, cross-platform JavaScript runtime environment that lets developers create servers, web apps, command line tools and scripts.               |
+| [**Express**](http://expressjs.com/) | Fast, unopinionated, minimalist web framework for Node.js. With a myriad of HTTP utility methods and middleware at your disposal, creating a robust API is quick and easy. |
+| [**MySQL**](https://www.mysql.com/)  | A relational database management system.                                                                                                                                   |
