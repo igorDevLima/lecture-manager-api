@@ -206,7 +206,7 @@ curl --request PUT \
 ##### Example cURL Command
 
 ```bash
-curl --request GET \
+curl --request DELETE \
 --url http://localhost:3001/location/18
 ```
 
