@@ -384,6 +384,173 @@ curl --request DELETE \
 
 </details>
 
+---
+
+### :point_right: Panelist <code><b>/panelist</b></code>
+
+#### Creating, reading, updating and deleting a panelist
+
+<details>
+ <summary><code>POST</code> <code><b>/</b></code></summary>
+
+##### Parameters
+
+> None
+
+##### Request Body
+
+> | Field           | Type   | Required | Description                                       |
+> | --------------- | ------ | -------- | ------------------------------------------------- |
+> | first_name            | String | Yes      | The first name of panelist                                    |
+> | last_name            | String | Yes      | The last name of panelist
+> | academic_degree   | String | Yes      | The academic degree of panelsit. ex.: "phd in physics"                                 |
+
+##### Responses
+
+> | HTTP Code | Content-Type       | Response                                                                                                                                                    |
+> | --------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+> | `201`     | `application/json` | `{"message": "Panelist created!","data": {"fieldCount": 0,"affectedRows": 1,"insertId": 20,"info": "","serverStatus": 2,"warningStatus": 0,"changedRows": 0}}` |
+> | `400`     | `application/json` | `{"error": "\"first_name\" is required"}`                                                                                                              |
+
+##### Example cURL Command
+
+```bash
+curl --request POST \
+--url http://localhost:3001/panelist \
+--header 'Content-Type: application/json' \
+--data '{
+	"first_name": "Jimmy",
+	"last_name": "Cool",
+	"academic_degree": "graduate in advertising"
+}'
+```
+
+</details>
+
+<details>
+ <summary><code>GET</code> <code><b>/</b></code></summary>
+
+##### Parameters
+
+> None
+
+##### Request Body
+
+> None
+
+##### Responses
+
+> | HTTP Code | Content-Type       | Response                                                                                                                                                                                                                                                                                                                                                                           |
+> | --------- | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+> | `200`     | `application/json` | ` {"message": "All panelists found!",   "data": [{{ "panelist_id": 5, "first_name": "Jimmy","last_name": "Cool", "academic_degree": "graduate in advertising" }}]` |
+
+##### Example cURL Command
+
+```bash
+curl --request GET \
+--url http://localhost:3001/panelist
+```
+
+</details>
+
+<details>
+ <summary><code>GET</code> <code><b>/{id}</b></code></summary>
+
+##### Parameters
+
+> | Field | Type | Required | Description  |
+> | ----- | ---- | -------- | ------------ |
+> | id    | int  | Yes      | The panelist id |
+
+##### Request Body
+
+> None
+
+##### Responses
+
+> | HTTP Code | Content-Type       | Response                                                                                                                                                                                                                                                                                                                                                                           |
+> | --------- | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+> | `200`     | `application/json` | ` {"message": "All panelists found!",   "data": [{{ "panelist_id": 5, "first_name": "Jimmy","last_name": "Cool", "academic_degree": "graduate in advertising" }}]` |
+> | `204`     | `application/json` | ` {"error": "Panelist not found"}`                                                                                               |
+
+##### Example cURL Command
+
+```bash
+curl --request GET \
+--url http://localhost:3001/panelist/5
+```
+
+</details>
+
+<details>
+ <summary><code>PUT</code> <code><b>/{id}</b></code></summary>
+
+##### Parameters
+
+> | Field | Type | Required | Description  |
+> | ----- | ---- | -------- | ------------ |
+> | id    | int  | Yes      | The panelist id |
+
+##### Request Body
+
+> | Field           | Type   | Required | Description                                       |
+> | --------------- | ------ | -------- | ------------------------------------------------- |
+> | first_name            | String | Yes      | The first name of panelist                                    |
+> | last_name            | String | Yes      | The last name of panelist
+> | academic_degree   | String | Yes      | The academic degree of panelsit. ex.: "phd in physics" |
+
+##### Responses
+
+> | HTTP Code | Content-Type       | Response                                                                                                                                                                                              |
+> | --------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
+> | `200`     | `application/json` | `{"message": "Panelist updated!","data": {"fieldCount": 0,"affectedRows": 1,"insertId": 0,"info": "Rows matched: 1  Changed: 1  Warnings: 0","serverStatus": 2,"warningStatus": 0,"changedRows": 1}}` |
+> | `400`     | `application/json` | `{"error": "\"first_name\" is required"}`                                                                               |
+> | `404`     | `application/json` | `{"error": "Panelist not found"}`                                                                                                                                                                     |     |
+
+##### Example cURL Command
+
+```bash
+curl --request PUT \
+--url http://localhost:3001/panelist/5 \
+--header 'Content-Type: application/json' \
+--data '{
+	"first_name": "Jimmy",
+	"last_name": "Coolest",
+	"academic_degree": "graduate in advertising"
+}'
+```
+
+</details>
+
+<details>
+ <summary><code>DELETE</code> <code><b>/{id}</b></code></summary>
+
+##### Parameters
+
+> | Field | Type | Required | Description     |
+> | ----- | ---- | -------- | --------------- |
+> | id    | int  | Yes      | The panelist id |
+
+##### Request Body
+
+> None
+
+##### Responses
+
+> | HTTP Code | Content-Type       | Response                                                                                                                                                                                                                                                            |
+> | --------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+> | `200`     | `application/json` | ` {"message": "Panelist deleted!",   "data": { "fieldCount": 0, "affectedRows": 1, "insertId": 0, "info": "","serverStatus": 2, "warningStatus": 0, "changedRows": 0}` |
+> | `204`     | `application/json` | ` {"error": "Panelist not found"}`                                                                                                                                                                                                                                  |
+
+##### Example cURL Command
+
+```bash
+curl --request DELETE \
+--url http://localhost:3001/panelist/5
+```
+
+</details>
+
 ## Technology
 
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
