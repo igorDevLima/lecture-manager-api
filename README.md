@@ -54,7 +54,7 @@ npm run start
 
 ## Routes
 
-### Location <code><b>/location</b></code>
+### :point_right: Location <code><b>/location</b></code>
 
 #### Creating, reading, updating and deleting a Location
 
@@ -214,7 +214,7 @@ curl --request DELETE \
 
 ---
 
-### Event <code><b>/event</b></code>
+### :point_right: Event <code><b>/event</b></code>
 
 #### Creating, reading, updating and deleting a Event
 
@@ -387,11 +387,8 @@ curl --request DELETE \
 ## Technology
 
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
-
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
-
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
-
 ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
 
 ### Back-end :coffee:
