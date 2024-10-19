@@ -1,5 +1,5 @@
-const Joi = require("joi");
-const { BadRequestError } = require("../helpers/api-error");
+const Joi = require('joi');
+const { BadRequestError } = require('../helpers/api-error');
 
 const validateParamsID = (req, res, next) => {
   const param = req.params;

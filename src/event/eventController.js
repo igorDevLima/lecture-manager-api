@@ -2,14 +2,14 @@ const {
   NotFoundError,
   ConflictError,
   BadRequestError,
-} = require("../common/helpers/api-error");
+} = require('../common/helpers/api-error');
 const {
   OKResponse,
   CreatedResponse,
-} = require("../common/helpers/api-success");
-const eventRepository = require("./eventRepository");
-const locationRepository = require("../location/locationRepository");
-const { formattedEventsData } = require("../common/helpers/functions");
+} = require('../common/helpers/api-success');
+const eventRepository = require('./eventRepository');
+const locationRepository = require('../location/locationRepository');
+const { formattedEventsData } = require('../common/helpers/functions');
 
 const addLocationIfNotExistAndReturnID = async (location_name) => {
   let eventLocation = {};
@@ -35,22 +35,22 @@ const checkLocationAvailability = async (
   location_id,
   body,
   ignoreEqualEventId = false,
-  event_id = null
+  event_id = null,
 ) => {
   if (ignoreEqualEventId && event_id === null)
-    throw new Error("event_id is required");
+    throw new Error('event_id is required');
 
   const [reservedEvents] = ignoreEqualEventId
     ? await eventRepository.findReservedLocationIgnoreEqualEventId(
         location_id,
         event_id,
-        body
+        body,
       )
     : await eventRepository.findReservedLocation(location_id, body);
 
   if (reservedEvents.length != 0)
     throw new ConflictError(
-      "Sorry, the location is already reserved for this date."
+      'Sorry, the location is already reserved for this date.',
     );
 };
 
@@ -59,8 +59,8 @@ class eventController {
     const [allEvents] = await eventRepository.findAll();
 
     return new OKResponse(
-      "All events found!",
-      formattedEventsData(allEvents)
+      'All events found!',
+      formattedEventsData(allEvents),
     ).send(res);
   }
 
@@ -69,10 +69,10 @@ class eventController {
 
     const [eventById] = await eventRepository.findById(id);
 
-    if (eventById.length == 0) throw new NotFoundError("event not found");
+    if (eventById.length == 0) throw new NotFoundError('event not found');
 
-    return new OKResponse("Event found!", formattedEventsData(eventById)).send(
-      res
+    return new OKResponse('Event found!', formattedEventsData(eventById)).send(
+      res,
     );
   }
 
@@ -92,7 +92,7 @@ class eventController {
       location_id: location_id,
     });
 
-    return new CreatedResponse("Event added!", newEvent).send(res);
+    return new CreatedResponse('Event added!', newEvent).send(res);
   }
 
   async update(req, res) {
@@ -101,7 +101,7 @@ class eventController {
 
     const [eventById] = await eventRepository.findById(id);
 
-    if (eventById.length == 0) throw new NotFoundError("Event not found");
+    if (eventById.length == 0) throw new NotFoundError('Event not found');
 
     const location_id = eventBody.location
       ? await addLocationIfNotExistAndReturnID(eventBody.location)
@@ -116,7 +116,7 @@ class eventController {
       location_id: location_id,
     });
 
-    return new OKResponse("Event updated!", updateEvent).send(res);
+    return new OKResponse('Event updated!', updateEvent).send(res);
   }
 
   async delete(req, res) {
@@ -124,11 +124,11 @@ class eventController {
 
     const [eventById] = await eventRepository.findById(id);
 
-    if (eventById.length == 0) throw new NotFoundError("Event not found");
+    if (eventById.length == 0) throw new NotFoundError('Event not found');
 
     const [deleteEvent] = await eventRepository.remove(id);
 
-    return new OKResponse("Event deleted!", deleteEvent).send(res);
+    return new OKResponse('Event deleted!', deleteEvent).send(res);
   }
 }
 

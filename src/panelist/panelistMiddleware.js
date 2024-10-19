@@ -1,5 +1,5 @@
-const Joi = require("joi");
-const { BadRequestError } = require("../common/helpers/api-error");
+const Joi = require('joi');
+const { BadRequestError } = require('../common/helpers/api-error');
 
 const validatePanelist = (req, res, next) => {
   const panelist = req.body;

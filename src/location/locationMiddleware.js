@@ -1,5 +1,5 @@
-const Joi = require("joi");
-const { BadRequestError } = require("../common/helpers/api-error");
+const Joi = require('joi');
+const { BadRequestError } = require('../common/helpers/api-error');
 
 const validateLocation = (req, res, next) => {
   const location = req.body;

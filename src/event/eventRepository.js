@@ -1,4 +1,4 @@
-const connection = require("../common/db/connection");
+const connection = require('../common/db/connection');
 
 class eventRepository {
   insert = (event) =>
@@ -9,7 +9,7 @@ class eventRepository {
         event.begin_date_time,
         event.end_date_time,
         event.location_id || null,
-      ]
+      ],
     );
 
   findAll = () =>
@@ -33,7 +33,7 @@ class eventRepository {
     LEFT JOIN
         lectures LE
     ON E.event_id = LE.event_id;
-  `
+  `,
     );
 
   findById = (id) =>
@@ -60,7 +60,7 @@ class eventRepository {
         ON E.event_id = LE.event_id
       WHERE E.event_id = ?;
   `,
-      [id]
+      [id],
     );
 
   findReservedLocation = (location_id, event) =>
@@ -72,7 +72,7 @@ class eventRepository {
       AND DATE(begin_date_time) <= DATE(?)
       AND DATE(?) <= DATE(end_date_time)
     `,
-      [location_id, event.end_date_time, event.begin_date_time]
+      [location_id, event.end_date_time, event.begin_date_time],
     );
 
   findReservedLocationIgnoreEqualEventId = (location_id, event_id, event) =>
@@ -85,7 +85,7 @@ class eventRepository {
         AND DATE(begin_date_time) <= DATE(?)
         AND DATE(?) <= DATE(end_date_time)
       `,
-      [location_id, event_id, event.end_date_time, event.begin_date_time]
+      [location_id, event_id, event.end_date_time, event.begin_date_time],
     );
 
   update = (id, event) =>
@@ -97,7 +97,7 @@ class eventRepository {
         event.end_date_time,
         event.location_id || null,
         id,
-      ]
+      ],
     );
 
   remove = (id) =>

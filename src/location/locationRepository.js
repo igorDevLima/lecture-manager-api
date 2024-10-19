@@ -1,4 +1,4 @@
-const connection = require("../common/db/connection");
+const connection = require('../common/db/connection');
 
 class LocationRepository {
   insert = (location) =>
@@ -15,7 +15,7 @@ class LocationRepository {
           SELECT name FROM locations WHERE name = ?
       ) LIMIT 1;
       `,
-      [location.name, location.name]
+      [location.name, location.name],
     );
 
   findAll = () =>
@@ -49,7 +49,7 @@ class LocationRepository {
     RIGHT JOIN
       locations L
     ON E.location_id = L.location_id WHERE L.location_id = ?`,
-      [id]
+      [id],
     );
 
   findByName = (location) =>

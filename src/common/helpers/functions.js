@@ -8,7 +8,7 @@ const formattedLocationsData = (locationsArray) =>
   locationsArray.reduce((acc, row) => {
     // Verifica se já existe a localização no accumulator
     const existingLocation = acc.find(
-      (item) => item.location_id === row.location_id
+      (item) => item.location_id === row.location_id,
     );
 
     // Se não existir, cria uma nova localização

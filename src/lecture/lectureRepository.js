@@ -1,4 +1,4 @@
-const connection = require("../common/db/connection");
+const connection = require('../common/db/connection');
 
 class LectureRepository {
   insert = (lecture) =>
@@ -9,7 +9,7 @@ class LectureRepository {
         lecture.begin_date_time,
         lecture.panelist_id,
         lecture.event_id,
-      ]
+      ],
     );
 
   findAll = () =>
@@ -21,7 +21,7 @@ class LectureRepository {
     connection.execute(
       `
     SELECT * FROM lectures WHERE lecture_id = ?`,
-      [id]
+      [id],
     );
 
   update = (id, lecture) =>
@@ -33,7 +33,7 @@ class LectureRepository {
         lecture.panelist_id,
         lecture.event_id,
         id,
-      ]
+      ],
     );
 
   remove = (id) =>
